@@ -62,6 +62,11 @@ var GameState = {
     
     this.fires.setAll('body.allowGravity', false);
 
+    //goal
+    this.goal = this.add.sprite(this.levelData.goal.x, this.levelData.goal.y, 'goal');
+    this.game.physics.arcade.enable(this.goal);
+    this.goal.body.allowGravity = false;
+
     //player
     this.player = this.add.sprite(this.levelData.playerStart.x, this.levelData.playerStart.y, 'player', 3);
     this.player.anchor.setTo(0.5);
@@ -77,7 +82,9 @@ var GameState = {
   update: function() {
     this.game.physics.arcade.collide(this.player, this.ground );
     this.game.physics.arcade.collide(this.player, this.platforms);
+
     this.game.physics.arcade.overlap(this.player, this.fires, this.killPlayer);
+    this.game.physics.arcade.overlap(this.player, this.goal, this.win);
 
     this.player.body.velocity.x = 0;
 
@@ -155,7 +162,12 @@ var GameState = {
   },
   killPlayer: function(player, fire) {
     game.state.start('GameState')
-  }
+  },
+  win: function(player, fire) {
+    alert('you win!');
+    game.state.start('GameState');
+  },
+
 };
 
 var game = new Phaser.Game(360, 592, Phaser.AUTO);
