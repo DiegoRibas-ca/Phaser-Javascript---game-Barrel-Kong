@@ -4,6 +4,7 @@ Simple game for children using Phaser.js Framework
 
 - Awsome GAME!;
 - Phaser physics;
+- Commands with keyboard or bottons on screen to devices;
 - external JSON files to set game content and atributes;
 - Animation with Sprites;
 
